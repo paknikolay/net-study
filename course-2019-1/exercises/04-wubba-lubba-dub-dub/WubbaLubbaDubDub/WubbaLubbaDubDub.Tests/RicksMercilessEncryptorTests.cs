@@ -12,7 +12,7 @@ namespace WubbaLubbaDubDub.Tests
         [Fact]
         public void TestSplitToLines()
         {
-            string text = "aaa\n\n\nb\n";
+            string text = "aaa\n\n\nb\r\n";
             string[] splited_text = new string[] {"aaa", "", "", "b", ""};
             var splited_text2 = text.SplitToLines();
             Assert.True(splited_text.SequenceEqual(splited_text2));
@@ -21,8 +21,8 @@ namespace WubbaLubbaDubDub.Tests
         [Fact]
         public void testSplitToWords()
         {
-            string text = "aaa b!!!? caaac, \"da\"!m.";
-            string[] splited_text = new string[] { "aaa", "b", "caaac", "da", "m" };
+            string text = "aaa b!!!? caaac, \"da\"!123.";
+            string[] splited_text = new string[] { "aaa", "b", "caaac", "da", "123" };
             var splited_text2 = text.SplitToWords();
 
             Assert.True(splited_text.SequenceEqual(splited_text2));
