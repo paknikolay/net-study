@@ -103,6 +103,11 @@ namespace WubbaLubbaDubDub.Tests
         [Fact]
         public void testGetUsedObjects()
         {
+            var text = "//aaa\n¶0:A¶ /*sd***¶B:0¶** ff////f*/fdsfd/*dsfds*/sf\n¶0:0¶//bbb\n¶0;5¶dkfjr/*aaa*/sfsdg";
+            var a = text.GetUsedObjects();
+
+            Assert.True(a[0] == 10);
+            Assert.True(a[1] == 0);
         }
 
     }

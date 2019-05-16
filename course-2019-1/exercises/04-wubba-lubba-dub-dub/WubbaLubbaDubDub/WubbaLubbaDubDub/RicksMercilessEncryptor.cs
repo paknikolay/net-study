@@ -24,7 +24,7 @@ namespace WubbaLubbaDubDub
         {
             // А вот здесь поиграйся с регулярками.
 
-             return Regex.Matches(line, @"([\w]+)").Cast<Match>().Select(m => m.Value).ToArray(); ;
+             return Regex.Matches(line, @"([\w]+)").Cast<Match>().Select(m => m.Value).ToArray() ;
         }
 
         /// <summary>
@@ -123,10 +123,17 @@ namespace WubbaLubbaDubDub
                 Задача на поиграться с регулярками - вся сложность в том, чтобы аккуратно игнорировать комментарии.
                 Экспериментировать онлайн можно, например, здесь: http://regexstorm.net/tester и https://regexr.com/
             */
-        }
+            var comments_rem_1 = Regex.Replace(text, @"\/\*((?!(\/\*))(.|\n))*\*\/", "");
+            var comments_rem_2 =  Regex.Replace(comments_rem_1, @"(\/\/[^\n]*)\n", "");
+            var a = Regex.Matches(comments_rem_2, @"¶([0-9A-F]):([0-9A-F])¶");
 
+            return a.Select(m => (Convert.ToInt64(m.Groups[1].Value, 16) << 32) +
+                                  Convert.ToInt64(m.Groups[2].Value, 16))
+                           .ToImmutableList();
+        }
+        //
         #endregion
-        
+
 
     }
 }
